@@ -67,10 +67,6 @@
 </ul>
 
 <!-- 댓글 더보기 버튼 -->
-<div>
-	<buton type="button" id="moreBtn" data-page="1"
-		class="btn btn-outline-dark" style="visibility:hidden">MORE+</buton>
-</div>
 
 <!-- 모달창 라인 -->
 
@@ -78,12 +74,12 @@
 
 
 <script type="text/javascript">
-let bnoVal= `<c:out value="${bdto.bvo.bno}"/>`;
-console.log(bnoVal);
+	let bnoVal = `<c:out value="${bvo.bno}"/>`;
+	console.log(bnoVal);
 </script>
 <script src="/resources/js/boardComment.js"></script>
 <script type="text/javascript">
-spreadCommentList(bnoVal);
+	/* spreadCommentList(bnoVal); */
 </script>
 
 <script type="text/javascript">

@@ -29,5 +29,6 @@ public class CommentController {
 				new ResponseEntity<String>("1",HttpStatus.OK) :
 					new ResponseEntity<String>("0",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
 
 }

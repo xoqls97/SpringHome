@@ -41,7 +41,7 @@ public class BoardController {
 	@GetMapping("/list")
 	public String list(Model m,PagingVO pgvo) {
 		log.info(">>>> pgvo >> {} ",pgvo);
-		List<BoardVO> list= bsv.list(pgvo);
+		List<BoardVO> list = bsv.list(pgvo);
 		m.addAttribute("list",list);
 		int totalCount = bsv.totalCount(pgvo);
 		PagingHandler ph = new PagingHandler(pgvo,totalCount);
@@ -50,7 +50,7 @@ public class BoardController {
 	}
 	
 	@GetMapping("/detail")
-	public void detail(@RequestParam("bno")int bno, Model m) {
+	public void detail(@RequestParam("bno") int bno, Model m) {
 		m.addAttribute("bvo",bsv.detail(bno));
 		
 	}
@@ -76,14 +76,7 @@ public class BoardController {
 		int isOk=bsv.delete(bno);
 		re.addFlashAttribute("deletemsg",isOk);
 		return "redirect:/board/list";
-		
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 	
