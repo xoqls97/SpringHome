@@ -37,6 +37,8 @@
 
 <button type="submit" class="btn btn-success">수정완료</button>
 </form>
+<a href="/board/list"><button type="button" class="btn btn-danger">취소</button></a>
+
 </div>
 
 

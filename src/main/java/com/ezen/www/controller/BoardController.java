@@ -2,10 +2,8 @@ package com.ezen.www.controller;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ezen.www.domain.BoardVO;
+import com.ezen.www.domain.PagingVO;
+import com.ezen.www.handler.PagingHandler;
 import com.ezen.www.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -38,10 +38,15 @@ public class BoardController {
 		
 	}
 	
-	@GetMapping
-	public void list(Model m) {
-		List<BoardVO> list= bsv.list();
+	@GetMapping("/list")
+	public String list(Model m,PagingVO pgvo) {
+		log.info(">>>> pgvo >> {} ",pgvo);
+		List<BoardVO> list= bsv.list(pgvo);
 		m.addAttribute("list",list);
+		int totalCount = bsv.totalCount(pgvo);
+		PagingHandler ph = new PagingHandler(pgvo,totalCount);
+		m.addAttribute("ph",ph);
+		return "/board/list";
 	}
 	
 	@GetMapping("/detail")

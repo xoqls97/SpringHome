@@ -11,6 +11,9 @@ public class PagingVO {
 	private int pageNo;
 	private int qty;
 	
+	private String type;
+	private String keyword;
+	
 	public PagingVO() {
 		this.pageNo=1;
 		this.qty=10;
@@ -23,7 +26,10 @@ public class PagingVO {
 	
 	public int getPageStart() {
 		return(this.pageNo-1)*qty;
-		
+	}
+	
+	public String[] getTypeToArray() {
+		return this.type ==null ? new String[] {}: this.type.split("");
 	}
 
 }

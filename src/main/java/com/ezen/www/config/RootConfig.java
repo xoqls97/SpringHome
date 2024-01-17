@@ -35,9 +35,9 @@ public class RootConfig {
 		// 기본설정
 		// log4jdbc-log4j2
 		hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
-		hikariConfig.setJdbcUrl("jdbc:log4jdbc:mysql://localhost:3306/springhome");
+		hikariConfig.setJdbcUrl("jdbc:log4jdbc:mysql://localhost:3306/mywebdb");
 		hikariConfig.setUsername("root");
-		hikariConfig.setPassword("1234");
+		hikariConfig.setPassword("ezen");
 		
 		hikariConfig.setMaximumPoolSize(5); // 최대 커넥션 갯수
 		hikariConfig.setMinimumIdle(5); // 최소 유효 커넥션 갯수(위의 최대값고 같은값으로 설정)
