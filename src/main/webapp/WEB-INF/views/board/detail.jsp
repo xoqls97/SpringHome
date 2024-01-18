@@ -79,7 +79,7 @@
 </script>
 <script src="/resources/js/boardComment.js"></script>
 <script type="text/javascript">
-	/* spreadCommentList(bnoVal); */
+	spreadCommentList(bnoVal); 
 </script>
 
 <script type="text/javascript">

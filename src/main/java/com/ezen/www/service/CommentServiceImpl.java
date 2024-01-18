@@ -1,5 +1,7 @@
 package com.ezen.www.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.ezen.www.domain.CommentVO;
@@ -17,6 +19,11 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public int post(CommentVO cvo) {
 		return cdao.post(cvo);
+	}
+
+	@Override
+	public List<CommentVO> list(int bno) {
+		return cdao.list(bno);
 	}
 
 }

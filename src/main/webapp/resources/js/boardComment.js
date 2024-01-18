@@ -44,17 +44,15 @@ async function postCommentToServer(cmtData){
     }
 };
 
-function spreadCommentList(bno,page =1){
-    getCommentListFromServer(bno, page).then(result =>{
+function spreadCommentList(bno){
+    getCommentListFromServer(bno).then(result =>{
     console.log(result);
     
-    if(result.cmtList.length > 0){
+    if(result.length > 0){
        const ul = document.getElementById('cmtListArea');
        
-       if(page ==1){
-          ul.innerHTML='';
-       }
-       for(let cvo of result.cmtList){
+      
+       for(let cvo of result){
           let li = `<li class="list-group-item" data-cno="${cvo.cno}" data-writer="${cvo.writer}">`;
                 li += `<div class="mb-3">`;
                 li += `<div class="fw-bold">${cvo.writer}</div>`;
@@ -67,21 +65,26 @@ function spreadCommentList(bno,page =1){
                 ul.innerHTML += li;
        }
        
-       let moreBtn = document.getElementById('moreBtn');
-       console.log(moreBtn);
-       
-       if(result.pgvo.pageNo < result.endPage){
-          moreBtn.style.visibility = "visible";
-          moreBtn.dataset.page = page +1;
-       }else{
-           moreBtn.style.visibility = "hidden";
-       }
+      
     }else{
        let li = `<li class="list-group-item">Comment List Empty</li>`;
        ul.innerHTML = li;
     }    
   })
 };
+
+async function getCommentListFromServer(bno){
+    try {
+        const resp = await fetch("/comment/list"+bno);
+        const result = await resp.json();
+        return result; 
+    } catch(error) {
+       console.log(error);
+    }
+};
+
+
+
 
 
 

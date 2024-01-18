@@ -1,11 +1,16 @@
 package com.ezen.www.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ezen.www.domain.CommentVO;
@@ -30,5 +35,15 @@ public class CommentController {
 					new ResponseEntity<String>("0",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
+	@GetMapping(value="/list{bno}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<CommentVO> list(@PathVariable("bno") int bno) {
+		log.info(">>>bno>>>>"+bno);
+		List<CommentVO> list=csv.list(bno);
+		
+		return list;
+	}
+	
+	
+
 
 }
