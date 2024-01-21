@@ -35,6 +35,10 @@
 	<select id="totalCount" resultType="int">
 		select count(bno) from board
 	</select>
+	
+	<select id="selectOneBno" resultType="long">
+	select max(bno) from board
+	</select>
 
 	<!-- search 라인 -->
 	<sql id="search">

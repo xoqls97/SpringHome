@@ -11,8 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-//@ComponentScan(basePackages = {"com.ezen.www.controller" , "com.myweb.www.handler"})
-@ComponentScan(basePackages = "com.ezen.www")
+@ComponentScan(basePackages ={"com.ezen.www"})
 @EnableWebMvc
 public class ServletConfiguration implements WebMvcConfigurer{
 
@@ -21,7 +20,7 @@ public class ServletConfiguration implements WebMvcConfigurer{
 		// resources 경로 설정 / 나중에 파일 업로드 경로 설정 추가
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 		// 파일 업로드 실제 경로
-		registry.addResourceHandler("/upload/**").addResourceLocations("file:///D:\\_myProject\\_java\\_fileUpload\\");
+		registry.addResourceHandler("/upload/**").addResourceLocations("file:C:\\springfileupload\\java\\fileUpload\\");
 	}
 
 	@Override

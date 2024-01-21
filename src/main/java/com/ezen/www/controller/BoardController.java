@@ -1,6 +1,5 @@
 package com.ezen.www.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -9,10 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ezen.www.domain.BoardDTO;
 import com.ezen.www.domain.BoardVO;
+import com.ezen.www.domain.FileVO;
 import com.ezen.www.domain.PagingVO;
+import com.ezen.www.handler.FileHandler;
 import com.ezen.www.handler.PagingHandler;
 import com.ezen.www.service.BoardService;
 
@@ -26,13 +29,20 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardController {
 
 	private final BoardService bsv;
+	private final FileHandler fh;
 	
 	@GetMapping("/register")
 	public void register() {}
 	
 	@PostMapping("/register")
-	public String register(BoardVO bvo,Model m) {
-		int isOk=bsv.register(bvo);
+	public String register(Model m,BoardVO bvo, @RequestParam(name="file",required=false) MultipartFile[] file) {
+		log.info(">>>bvo>>{}",bvo);
+		List<FileVO> flist = null;
+		if(file[0].getSize()>0) {
+			flist = fh.uploadFiles(file);
+		}
+		int isOk=bsv.register(new BoardDTO(bvo,flist));
+		
 		m.addAttribute("registermsg",isOk);
 		
 		return "index";
@@ -52,7 +62,7 @@ public class BoardController {
 	
 	@GetMapping("/detail")
 	public void detail(@RequestParam("bno") int bno, Model m) {
-		m.addAttribute("bvo",bsv.detail(bno));
+		m.addAttribute("bdto",bsv.detail(bno));
 		
 	}
 
@@ -63,9 +73,14 @@ public class BoardController {
 	}
 	
 	@PostMapping("/modify")
-	public String modify(BoardVO bvo,RedirectAttributes re) {
+	public String modify(BoardVO bvo,RedirectAttributes re,
+			@RequestParam(name="file",required=false)MultipartFile[] file) {
+		List<FileVO> flist = null;
+		if(file[0].getSize()>0) {
+			flist = fh.uploadFiles(file);
+		}
 		log.info(">>bvo>>>>>>>>>"+bvo);
-		int isOk=bsv.modify(bvo);
+		int isOk=bsv.modify(new BoardDTO(bvo,flist));
 		re.addFlashAttribute("modifymsg",isOk);	
 		
 		return "redirect:/board/detail?bno="+bvo.getBno();
@@ -78,7 +93,6 @@ public class BoardController {
 		re.addFlashAttribute("deletemsg",isOk);
 		return "redirect:/board/list";
 	}
-	
 	
 	
 	

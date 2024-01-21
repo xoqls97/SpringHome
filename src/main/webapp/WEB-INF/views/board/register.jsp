@@ -7,7 +7,7 @@
 <div class="container-md">
 <h2>글쓰기페이지</h2>
 <br>
-<form action="/board/register" method="post">
+<form action="/board/register" method="post" enctype="multipart/form-data">
 
 <div class="mb-3">
   <label for="title" class="form-label">제목</label>
@@ -24,12 +24,25 @@
   <textarea class="form-control" name="content" id="content" rows="3" placeholder="내용을 작성해주세요..."></textarea>
 </div>
 
-<a href="/"><button type="button" class="btn btn-secondary">취소</button></a>
-<button type="submit" class="btn btn-secondary">전송</button>
 
+<!-- 파일 입력 라인 추가 -->
+<div class="mb-3">
+  <input type="file" name="file" class="form-control" id="file" multiple="multiple"
+  style=" display:none">
+  <button type="button" class="btn btn-primary" id="trigger">FileUpload</button>
+</div>
+
+<!-- 파일 목록 표시 라인 -->
+<div class="mb-3" id="fileZone">
+
+</div>
+<button type="submit" class="btn btn-primary" id="regBtn">전송</button>
+<a href="/"><button type="button" class="btn btn-secondary">취소</button></a>
 
 </form>
 </div>
+<script src="/resources/js/boardRegister.js"></script>
+
 
 
 <jsp:include page="../layout/footer.jsp"></jsp:include>

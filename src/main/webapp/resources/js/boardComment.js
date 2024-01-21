@@ -50,7 +50,8 @@ function spreadCommentList(bno){
     
     if(result.length > 0){
        const ul = document.getElementById('cmtListArea');
-       
+     
+       ul.innerHTML='';
       
        for(let cvo of result){
           let li = `<li class="list-group-item" data-cno="${cvo.cno}" data-writer="${cvo.writer}">`;
@@ -83,6 +84,87 @@ async function getCommentListFromServer(bno){
     }
 };
 
+async function editCommentToServer(cmtDataMod){
+   try {
+      const url = "/comment/edit";
+      const config = {
+         method:"put",
+         headers:{
+            'content-type' : 'application/json; charset=utf-8'
+         },
+         body: JSON.stringify(cmtDataMod)
+
+      };
+      const resp = await fetch(url,config);
+      const result = await resp.text();
+      return result;
+   } catch(error){
+      console.log(error);
+   }
+
+}
+
+document.addEventListener('click',(e)=>{
+   console.log(e.target);
+   if(e.target.classList.contains('mod')){
+      let li = e.target.closest('li');
+                                          
+      let cmtText = li.querySelector('.fw-bold').nextSibling;
+      console.log(cmtText);
+
+      document.getElementById('cmtTextMod').value = cmtText.nodeValue;
+      document.getElementById('cmtModBtn').setAttribute("data-cno",li.dataset.cno);
+      document.getElementById('cmtModBtn').setAttribute("data-writer",li.dataset.writer);
+   } else if(e.target.id =='cmtModBtn'){
+      let cmtDataMod={
+         cno: e.target.dataset.cno,
+         writer: e.target.dataset.writer,
+         content: document.getElementById('cmtTextMod').value
+    
+      };
+      console.log(cmtDataMod);
+      editCommentToServer(cmtDataMod).then(result =>{
+         if (result =="1"){
+            alert('댓글 수정 성공');
+            document.querySelector('.btn-close').click();
+         }
+         spreadCommentList(bnoVal);
+      })
+
+      
+   }else if(e.target.classList.contains('del')){
+      let li = e.target.closest('li');
+      let cno = li.dataset.cno;
+      deleteCommentToServer(cno).then(result =>{
+         if (result =="1"){
+            alert('댓글 삭제 성공');
+         }
+         spreadCommentList(bnoVal);
+      })
+
+   }
+
+})
+
+async function deleteCommentToServer(cno){
+   try{
+      const url='/comment/delete';
+      const config = {
+         method : "delete",
+         headers:{
+            'content-type': 'application/json; charset=utf-8'
+         },
+         body:JSON.stringify(cno)
+      };
+      const resp = await fetch(url,config);
+      const result = await resp.text();
+      return result;
+
+   }catch(error){
+      console.log(error);
+   }
+
+}
 
 
 

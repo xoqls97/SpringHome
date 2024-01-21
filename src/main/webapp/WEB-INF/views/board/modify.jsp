@@ -6,7 +6,7 @@
 <jsp:include page="../layout/header.jsp"></jsp:include>
 <div class="container-md">
 <h1>Board Modify Page</h1>
-<%-- <c:set value="${bdto.bvo }" var="bvo" /> --%>
+<c:set value="${bdto.bvo }" var="bvo" /> 
 <form action="/board/modify" method="post">
 <div class="mb-3">
   <label for="bno" class="form-label">번호</label>

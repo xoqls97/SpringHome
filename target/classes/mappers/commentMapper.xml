@@ -13,4 +13,13 @@ values (#{bno},#{writer},#{content})
 <select id="list" resultType="com.ezen.www.domain.CommentVO">
 select * from comment where bno=#{bno}
 </select>
+
+<update id="modify">
+update comment set content=#{content}, mod_at=now() where cno=#{cno}
+</update>
+
+<delete id="delete">
+delete from comment where cno=#{cno}
+</delete>
+
 </mapper>
