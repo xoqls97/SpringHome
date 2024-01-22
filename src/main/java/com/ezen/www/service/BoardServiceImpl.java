@@ -53,8 +53,18 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int modify(BoardVO bvo) {
-		return bdao.modify(bvo);
+	public int modify(BoardDTO bdto) {
+		int isOk = bdao.modify(bdto.getBvo());
+		if(bdto.getFlist() ==null) {
+			return isOk;
+		}
+		if(isOk >0 && bdto.getFlist().size()>0) {
+			for(FileVO fvo: bdto.getFlist()) {
+				fvo.setBno(bdto.getBvo().getBno());
+				isOk *=fdao.insertFile(fvo);
+			}
+		}
+		return isOk;
 	}
 
 	@Override
@@ -66,6 +76,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int totalCount(PagingVO pgvo) {
 		return bdao.totalCount(pgvo);
+	}
+
+	@Override
+	public int deletefile(String uuid) {
+		
+		return fdao.deletefile(uuid);
 	}
 
 }

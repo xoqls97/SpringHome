@@ -14,10 +14,12 @@ public interface BoardService {
 
 	BoardDTO detail(int bno);
 
-	int modify(BoardVO bvo);
+	int modify(BoardDTO bdto);
 
 	int delete(int bno);
 
 	int totalCount(PagingVO pgvo);
+
+	int deletefile(String uuid);
 
 }

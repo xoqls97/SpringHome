@@ -2,10 +2,15 @@ package com.ezen.www.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -69,7 +74,7 @@ public class BoardController {
 	@GetMapping("/modify")
 	public void modify(@RequestParam("bno")int bno,Model m) {
 	log.info(">>>>>>>>bno>>>>>>>> {}",bno);
-	m.addAttribute("bvo",bsv.detail(bno));
+	m.addAttribute("bdto",bsv.detail(bno));
 	}
 	
 	@PostMapping("/modify")
@@ -81,7 +86,8 @@ public class BoardController {
 		}
 		log.info(">>bvo>>>>>>>>>"+bvo);
 		int isOk=bsv.modify(new BoardDTO(bvo,flist));
-		re.addFlashAttribute("modifymsg",isOk);	
+		re.addAttribute("bno",bvo.getBno());
+		re.addFlashAttribute("modifymsg",isOk);
 		
 		return "redirect:/board/detail?bno="+bvo.getBno();
 		
@@ -93,6 +99,18 @@ public class BoardController {
 		re.addFlashAttribute("deletemsg",isOk);
 		return "redirect:/board/list";
 	}
+	
+	@DeleteMapping(value="/deletefile",produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> deletefile(@RequestBody FileVO fvo){
+		log.info(">> uuid>>{}",fvo.getUuid());
+		int isOk = bsv.deletefile(fvo.getUuid());
+		return isOk>0 ? new ResponseEntity<String>("1",HttpStatus.OK)
+				: new ResponseEntity<String>("0",HttpStatus.INTERNAL_SERVER_ERROR);
+		
+		
+	}
+	
+	
 	
 	
 	

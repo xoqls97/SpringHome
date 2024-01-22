@@ -15,4 +15,8 @@ values(#{uuid},#{saveDir},#{fileName},#{fileType},#{bno},#{fileSize})
 select * from file where bno = #{bno}
 </select>
 
+<delete id="deletefile">
+delete from file where uuid=#{uuid}
+</delete>
+
 </mapper>
