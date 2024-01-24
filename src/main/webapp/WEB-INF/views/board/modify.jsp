@@ -7,7 +7,7 @@
 <div class="container-md">
 	<h1>Board Modify Page</h1>
 	<c:set value="${bdto.bvo }" var="bvo" />
-	<form action="/board/modify" method="post">
+	<form action="/board/modify" method="post" enctype="multipart/form-data">
 		<div class="mb-3">
 			<label for="bno" class="form-label">번호</label> <input type="text"
 				name="bno" class="form-control" id="bno" value="${bvo.bno }"
@@ -79,8 +79,6 @@
 		<a href="/board/list"><button type="button" class="btn btn-primary">리스트</button></a>
 		<button type="submit" class="btn btn-success" id="regBtn">수정완료</button>
 	</form>
-	<a href="/board/list"><button type="button" class="btn btn-danger">취소</button></a>
-
 </div>
 
 <script src="/resources/js/boardModify.js"></script>

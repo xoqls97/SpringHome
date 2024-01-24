@@ -12,4 +12,6 @@ public interface FileDAO {
 
 	int deletefile(String uuid);
 
+	List<FileVO> selectListAllFile();
+
 }

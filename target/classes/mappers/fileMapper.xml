@@ -19,4 +19,7 @@ select * from file where bno = #{bno}
 delete from file where uuid=#{uuid}
 </delete>
 
+<select id="selectListAllFile" resultType="com.ezen.www.domain.FileVO">
+select * from file
+</select>
 </mapper>

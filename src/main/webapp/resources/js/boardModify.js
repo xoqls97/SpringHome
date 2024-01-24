@@ -1,5 +1,4 @@
 console.log("boardModify js in");
-
 document.getElementById('trigger').addEventListener('click', () => {
     document.getElementById('file').click();
 })

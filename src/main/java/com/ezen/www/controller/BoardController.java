@@ -89,7 +89,7 @@ public class BoardController {
 		re.addAttribute("bno",bvo.getBno());
 		re.addFlashAttribute("modifymsg",isOk);
 		
-		return "redirect:/board/detail?bno="+bvo.getBno();
+		return "redirect:/board/list";
 		
 	}
 	
@@ -106,12 +106,6 @@ public class BoardController {
 		int isOk = bsv.deletefile(fvo.getUuid());
 		return isOk>0 ? new ResponseEntity<String>("1",HttpStatus.OK)
 				: new ResponseEntity<String>("0",HttpStatus.INTERNAL_SERVER_ERROR);
-		
-		
 	}
-	
-	
-	
-	
 	
 }

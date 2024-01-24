@@ -2,6 +2,6 @@
     pageEncoding="UTF-8"%>
 
 
-<h1>푸터임ㅋ</h1>
+
 </body>
 </html>

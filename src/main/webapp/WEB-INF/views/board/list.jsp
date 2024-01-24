@@ -99,4 +99,10 @@
 				게시글 삭제성공!!");
 	};
 </script>
+<script type="text/javascript">
+    const modifymsg= `<c:out value="${modifymsg}"/>`;
+    if(modifymsg>0){
+    	alert('게시글 수정성공!');
+    };
+</script>
 <jsp:include page="../layout/footer.jsp"></jsp:include>
