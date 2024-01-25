@@ -8,12 +8,14 @@ import javax.servlet.annotation.MultipartConfig;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import com.mysql.cj.protocol.Security;
+
 public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitializer { // WebCOnfig inimplemented 해주기
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		// TODO Auto-generated method stub
-		return new Class[] {RootConfig.class};
+		return new Class[] {RootConfig.class,SecurityConfig.class};
 	}
 
 	@Override

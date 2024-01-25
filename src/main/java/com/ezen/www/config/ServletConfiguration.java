@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-@ComponentScan(basePackages ={"com.ezen.www"})
+@ComponentScan(basePackages ={"com.ezen.www.controller","com.ezen.www.handler"})
 @EnableWebMvc
 public class ServletConfiguration implements WebMvcConfigurer{
 
