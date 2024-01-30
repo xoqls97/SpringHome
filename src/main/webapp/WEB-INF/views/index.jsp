@@ -10,7 +10,7 @@
 	};
 </script>
 <script type="text/javascript">
-    const memberinsertmsg=`<c:out value="${memverinsertmsg}"/>`;
+    const memberinsertmsg=`<c:out value="${memberinsertmsg}"/>`;
     if(memberinsertmsg>0){
     	alert('회원가입 성공!');
     }
